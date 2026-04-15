@@ -28,13 +28,20 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
-app.UseRouting();
-
-
-
 app.UseCustomExeptionHandllingMiddleware();
 
+app.UseRouting();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
+
+
+app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
