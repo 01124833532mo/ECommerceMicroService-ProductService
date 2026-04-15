@@ -4,7 +4,7 @@ using ProductService.Api;
 using ProductService.Api.MiddleWare;
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDataAccessLayerRegistration();
+builder.Services.AddDataAccessLayerRegistration(builder.Configuration);
 builder.Services.AddBusinessLogicLayerRegistration();
 builder.Services.AddApiRegistration();
 
