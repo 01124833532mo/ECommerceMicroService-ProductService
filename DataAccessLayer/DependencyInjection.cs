@@ -11,6 +11,8 @@ namespace DataAccessLayer
 
             services.AddDbContext<Context.ApplicationDbContext>(options =>
                 options.UseMySQL(configuration.GetConnectionString("DefaultConnection")!));
+
+            services.AddScoped<RepositoryContracts.IProductRepository, Repositories.ProductsRepository>();
             return services;
 
         }
