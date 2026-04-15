@@ -1,5 +1,6 @@
 using BussnissLogicLayer;
 using DataAccessLayer;
+using eCommerce.ProductsMicroService.API.APIEndpoints;
 using ProductService.Api;
 using ProductService.Api.MiddleWare;
 var builder = WebApplication.CreateBuilder(args);
@@ -39,4 +40,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapProductAPIEndpoints();
 app.Run();
