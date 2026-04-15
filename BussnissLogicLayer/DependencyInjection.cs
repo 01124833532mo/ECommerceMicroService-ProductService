@@ -6,6 +6,7 @@ namespace BussnissLogicLayer
     {
         public static IServiceCollection AddBusinessLogicLayerRegistration(this IServiceCollection services)
         {
+            services.AddScoped<ServiceContracts.IProductsService, Services.ProductsService>();
             return services;
         }
     }
