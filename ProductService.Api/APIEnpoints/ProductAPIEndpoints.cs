@@ -48,6 +48,10 @@ public static class ProductAPIEndpoints
             }
 
             List<ProductResponse?> products = await productsService.GetProductsByCondition(temp => temp.Category == categoryOption.ToString());
+            if (products.Count == 0)
+            {
+                return Results.NotFound($"No products found in category '{Category}'.");
+            }
             return Results.Ok(products);
         });
 

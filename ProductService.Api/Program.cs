@@ -1,8 +1,10 @@
 using BussnissLogicLayer;
 using DataAccessLayer;
+using DataAccessLayer.Context;
 using eCommerce.ProductsMicroService.API.APIEndpoints;
 using ProductService.Api;
 using ProductService.Api.MiddleWare;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDataAccessLayerRegistration(builder.Configuration);
@@ -28,10 +30,17 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Auto-create database and apply migrations
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.EnsureCreated();
+}
+
 app.UseCustomExeptionHandllingMiddleware();
 
 app.UseRouting();
